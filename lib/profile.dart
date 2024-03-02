@@ -93,19 +93,21 @@ void showAboutDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text("About"),
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Expiry Smart is an innovative mobile application aimed at addressing the Sustainable Development Goal of responsible consumption and production. Expiry Smart seeks to revolutionize the way we manage our groceries and minimize food waste. The app allows users to easily input their grocery items along with their expiry dates, leveraging a simple and intuitive interface. With a sophisticated notification system, Expiry Smart sends timely reminders to users, alerting them when their groceries are nearing expiration. Furthermore, the app provides valuable guidance on how to utilize expired products safely and effectively, as well as offering insights into recycling options. By empowering users to make informed decisions about their consumption habits and reduce food waste, Expiry Smart embodies a commitment to sustainable living and responsible resource management."
-              ),
-              const Divider(),
-              Text(
-                "Developers: Bibhu Lammichnne, Drishtant Bhandari, Riva Kansakar, and Quincey Doan."
-              ),
-            ],
+        content: Scrollbar(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Expiry Smart is an innovative mobile application aimed at addressing the Sustainable Development Goal of responsible consumption and production. Expiry Smart seeks to revolutionize the way we manage our groceries and minimize food waste. The app allows users to easily input their grocery items along with their expiry dates, leveraging a simple and intuitive interface. With a sophisticated notification system, Expiry Smart sends timely reminders to users, alerting them when their groceries are nearing expiration. Furthermore, the app provides valuable guidance on how to utilize expired products safely and effectively, as well as offering insights into recycling options. By empowering users to make informed decisions about their consumption habits and reduce food waste, Expiry Smart embodies a commitment to sustainable living and responsible resource management."
+                ),
+                const Divider(),
+                Text(
+                  "Developers: Bibhu Lammichnne, Drishtant Bhandari, Riva Kansakar, and Quinxie Doan."
+                ),
+              ],
+            ),
           ),
         ),
         actions: [
@@ -120,5 +122,4 @@ void showAboutDialog(BuildContext context) {
     },
   );
 }
-
 
