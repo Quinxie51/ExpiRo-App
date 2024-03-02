@@ -21,7 +21,7 @@ class MyProfileScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: 190, height: 120,
-                //child: Image (image: AssetImage('lib/assets/images/user_profile.jpg')),
+                child: Image (image: AssetImage('assets/images/user_profile.jpg')),
               ),
             ],
           ),
