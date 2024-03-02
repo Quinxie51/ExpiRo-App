@@ -10,12 +10,13 @@ class MyGuideScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        width: double.infinity,
-        height: 844 * fem,
-        decoration: BoxDecoration(
-          color: Color(0xffffffff),
-        ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          height: 844 * fem,
+          decoration: BoxDecoration(
+            color: Color(0xffffffff),
+          ),
         child: Stack(
           children: <Widget>[
             Positioned(
@@ -78,7 +79,7 @@ class MyGuideScreen extends StatelessWidget {
                           Container(
                             constraints: BoxConstraints(maxWidth: 324 * fem),
                             child: Text(
-                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc. Eu arcu montes, sit elit, maecenas feugiat. Urna, habitant suspendisse suspendisse pharetra nec. Nibh mauris nullam nec mattis.',
+                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc.',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontSize: 14 * ffem,
@@ -136,7 +137,7 @@ class MyGuideScreen extends StatelessWidget {
                           Container(
                             constraints: BoxConstraints(maxWidth: 324 * fem),
                             child: Text(
-                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc. Eu arcu montes, sit elit, maecenas feugiat. Urna, habitant suspendisse suspendisse pharetra nec. Nibh mauris nullam nec mattis.',
+                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc.',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontSize: 14 * ffem,
@@ -192,7 +193,7 @@ class MyGuideScreen extends StatelessWidget {
                           Container(
                             constraints: BoxConstraints(maxWidth: 324 * fem),
                             child: Text(
-                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc. Eu arcu montes, sit elit, maecenas feugiat. Urna, habitant suspendisse suspendisse pharetra nec. Nibh mauris nullam nec mattis.',
+                              'Eu arcu montes, sit elit, maecenas feugiat. Urna, habitant suspendisse suspendisse pharetra nec.',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontSize: 14 * ffem,
@@ -211,6 +212,7 @@ class MyGuideScreen extends StatelessWidget {
               ),
           ]
         )
+      )
       )
      );
   }
