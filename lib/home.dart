@@ -26,17 +26,52 @@ class MyHomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const Column(
+        body: Column(
           children: [
-            Column(
+            const Column(
               children: [
                 Padding(
                   padding: EdgeInsets.all(15),
                   child: Text("Here is the list of your groceries")),
                 ],
             ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 35, right: 25),
+                  child: Row(
+                  children: [
+                    const Text(
+                      "Recent",
+                      style: TextStyle(
+                        fontFamily: "QuickSand",
+                        fontSize: 15,
+                      ),
+                      ),
+
+                      const Spacer(),
+
+                      ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ))
+                      ),
+                      onPressed: button_clicked, 
+                      child: const Text("Sort"),
+                      ),
+                  ],
+                ),
+                )
+              ],
+            ),
           ],
         )
       );
   }
 }
+
+
+void button_clicked(){
+  print("aaaa");
+  }
