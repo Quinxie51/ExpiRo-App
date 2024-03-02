@@ -7,11 +7,11 @@ import 'profile.dart';
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
-
 
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Hackathon',
+            'ExpirySmart',
             style: TextStyle(
               fontFamily: "QuickSand",
               fontSize: 24.0,
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
             ),
             ),
         ),
-        
+
       floatingActionButton: _buildFloatingActionButton(), // Add the FAB here
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, // Position the FAB in the center
       bottomNavigationBar: BottomNavigationBar(
