@@ -17,13 +17,28 @@ class MyProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(defaultPadding),
-          child: const Column(
-            children: [
-              SizedBox(
-                width: 190, height: 120,
-                child: Image (image: AssetImage('assets/images/user_profile.jpg')),
-              ),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 120,
+                  height: 120,
+                  child: ClipRRect( 
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Image(
+                      image: AssetImage('assets/images/user_profile.jpg'),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "Emu",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
           ),
         ),
       ),
