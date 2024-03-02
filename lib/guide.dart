@@ -5,8 +5,9 @@ class MyGuideScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double fem = 1.0; // Define your scaling factor
-    const double ffem = 1.0; // Define another scaling factor if needed
+    double baseWidth = 380;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
 
     return Scaffold(
       appBar: AppBar(),
@@ -52,10 +53,9 @@ class MyGuideScreen extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 12 * fem),
                       width: 48 * fem,
                       height: 48 * fem,
-                      child: Image.network(
-                        '[Image url]', // Replace with your image URL
-                        width: 48 * fem,
-                        height: 48 * fem,
+                      child: Image.asset('assets/images/tomato.jpeg', // Replace this with the actual path
+                      width: 48 * fem,
+                      height: 48 * fem,
                       ),
                     ),
                     Container(
@@ -79,7 +79,7 @@ class MyGuideScreen extends StatelessWidget {
                           Container(
                             constraints: BoxConstraints(maxWidth: 324 * fem),
                             child: Text(
-                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc.',
+                              'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc. Risus ac tellus sapien gravida sit elementum dui eget nunc.',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontSize: 14 * ffem,
@@ -110,10 +110,9 @@ class MyGuideScreen extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 12 * fem),
                       width: 48 * fem,
                       height: 48 * fem,
-                      child: Image.network(
-                        '[Image url]', // Replace with your image URL
-                        width: 48 * fem,
-                        height: 48 * fem,
+                      child: Image.asset('assets/images/food container.jpeg', // Replace this with the actual path
+                      width: 48 * fem,
+                      height: 48 * fem,
                       ),
                     ),
                     Container(
@@ -166,10 +165,9 @@ class MyGuideScreen extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 12 * fem),
                       width: 48 * fem,
                       height: 48 * fem,
-                      child: Image.network(
-                        '[Image url]', // Replace with your image URL
-                        width: 48 * fem,
-                        height: 48 * fem,
+                      child: Image.asset('assets/images/user_profile.jpg', // Replace this with the actual path
+                      width: 48 * fem,
+                      height: 48 * fem,
                       ),
                     ),
                     Container(
