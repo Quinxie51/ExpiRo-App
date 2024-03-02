@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class MyHomeScreen extends StatelessWidget {
+class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _MyHomeScreenState createState() => _MyHomeScreenState();
+}
+
+class _MyHomeScreenState extends State<MyHomeScreen> {
+  String sort = "ascending";
+
+  void changeSort(){
+    sort = sort == "ascending" ? "descending" : "ascending";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +70,7 @@ class MyHomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ))
                       ),
-                      onPressed: button_clicked, 
+                      onPressed: changeSort, 
                       child: const Text("Sort"),
                       ),
                   ],
@@ -70,8 +83,3 @@ class MyHomeScreen extends StatelessWidget {
       );
   }
 }
-
-
-void button_clicked(){
-  print("aaaa");
-  }
