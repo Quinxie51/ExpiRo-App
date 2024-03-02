@@ -28,8 +28,16 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Hackathon'),
+          title: const Text(
+            'Hackathon',
+            style: TextStyle(
+              fontFamily: "QuickSand",
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
+            ),
         ),
+        
       floatingActionButton: _buildFloatingActionButton(), // Add the FAB here
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, // Position the FAB in the center
       bottomNavigationBar: BottomNavigationBar(
