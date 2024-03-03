@@ -9,11 +9,18 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  String sort = "ascending";
-
+  String sort = "Recent";
+  IconData arrowIcon = Icons.arrow_drop_down;
   void changeSort(){
-    sort = sort == "ascending" ? "descending" : "ascending";
+    setState(() {
+      sort = sort == "Recent" ? "Oldest" : "Recent";
+      arrowIcon = sort == "Recent" ? Icons.arrow_drop_up : Icons.arrow_drop_down;
+    });
   }
+
+  // String getSortType(){
+  //   return ;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +61,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                   padding: const EdgeInsets.only(left: 35, right: 25),
                   child: Row(
                   children: [
-                    const Text(
-                      "Recent",
-                      style: TextStyle(
+                    Text(
+                      sort,
+                      style: const TextStyle(
                         fontFamily: "QuickSand",
                         fontSize: 15,
                       ),
@@ -71,7 +78,13 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         ))
                       ),
                       onPressed: changeSort, 
-                      child: const Text("Sort"),
+                      child:  Row( // Use Row for horizontal arrangement
+                          children: [
+                            Icon(arrowIcon), // Add your desired icon
+                            const SizedBox(width: 8.0), // Add some horizontal spacing between icon and text
+                            const Text('Sort'),
+                          ],
+                        ),
                       ),
                   ],
                 ),
