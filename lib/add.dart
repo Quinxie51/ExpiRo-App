@@ -210,8 +210,9 @@ class _MyAddScreenState extends State<MyAddScreen> {
           ),
         ),
         Positioned(
-          bottom: 20.0,
-          right: 20.0,
+          bottom: 70.0,
+          right: 70.0,
+          width: 140,
           child: InkWell(
             onTap: () {
               showModalBottomSheet(
@@ -219,9 +220,9 @@ class _MyAddScreenState extends State<MyAddScreen> {
                 builder: ((builder) => bottomSheet()),
               );
             },
-            child: Icon(
+            child: const Icon(
               Icons.camera_alt,
-              color: Colors.teal,
+              color: Colors.black,
               size: 28.0,
             ),
           ),
