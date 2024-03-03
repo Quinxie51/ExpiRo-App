@@ -79,7 +79,7 @@ final List<BottomNavigationBarItem> _items = [
     label: 'Add',
   ),
   const BottomNavigationBarItem(
-    icon: Icon(Icons.map_outlined),
+    icon: Icon(Icons.map),
     label: 'Guide',
   ),
   const BottomNavigationBarItem(
