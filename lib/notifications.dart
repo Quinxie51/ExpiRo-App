@@ -516,7 +516,7 @@ class MyNotificationsScreen extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  Text("1 week ago",
+                  Text("2 weeks ago",
                       textAlign: TextAlign.right), // Right-aligned
                 ],
               ),
