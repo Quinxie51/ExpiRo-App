@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyAddScreen extends StatefulWidget {
-  const MyAddScreen({Key? key}) : super(key: key);
+  const MyAddScreen({super.key});
 
   @override
   _MyAddScreenState createState() => _MyAddScreenState();
@@ -9,6 +9,9 @@ class MyAddScreen extends StatefulWidget {
 
 class _MyAddScreenState extends State<MyAddScreen> {
   DateTime? _selectedDate;
+  String categoryValue = "Others";
+  String reminderValue = '5 days before';
+  String foodName = "";
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -25,6 +28,18 @@ class _MyAddScreenState extends State<MyAddScreen> {
     }
   }
 
+  void categorySelected(newCategory){
+    setState(() {
+      categoryValue = newCategory != categoryValue ? newCategory: categoryValue;
+    });
+  }
+
+  void reminderSelected(newReminder){
+    setState(() {
+      reminderValue = newReminder != reminderValue ? newReminder: reminderValue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     const double defaultPadding = 16.0;
@@ -32,18 +47,21 @@ class _MyAddScreenState extends State<MyAddScreen> {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0), // Set the desired margin value
+          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Set the desired margin value
           child: Column(
             children: [
               const Text(
                 "Food Name",
                 style: TextStyle(
+                  fontFamily: "QuickSand",
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                onSubmitted: (value) {
+                  foodName = value;
+                },
+                decoration: const InputDecoration(
                   hintText: "Enter food name",
                 ),
               ),
@@ -52,7 +70,7 @@ class _MyAddScreenState extends State<MyAddScreen> {
                 "Expiry Date",
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: "QuickSand",
                 ),
               ),
               InkWell(
@@ -60,7 +78,7 @@ class _MyAddScreenState extends State<MyAddScreen> {
                   _selectDate(context);
                 },
                 child: InputDecorator(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Select expiry date",
                   ),
                   child: Text(
@@ -75,11 +93,12 @@ class _MyAddScreenState extends State<MyAddScreen> {
                 "Category",
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: "QuickSand",
                 ),
               ),
               DropdownButton(
                 isExpanded: true,
+                value: categoryValue,
                 items: const <String>[
                   'Fruit',
                   'Vegetable',
@@ -96,18 +115,21 @@ class _MyAddScreenState extends State<MyAddScreen> {
                     child: Text(value),
                   );
                 }).toList(),
-                onChanged: (_) {},
+                onChanged: (_) {
+                  categorySelected(_);
+                },
               ),
               const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
               const Text(
                 "Set Reminder",
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: "QuickSand",
                 ),
               ),
               DropdownButton(
                 isExpanded: true,
+                value: reminderValue,
                 items: const <String>[
                   '1 day before',
                   '2 days before',
@@ -120,7 +142,9 @@ class _MyAddScreenState extends State<MyAddScreen> {
                     child: Text(value),
                   );
                 }).toList(),
-                onChanged: (_) {},
+                onChanged: (_) {
+                  reminderSelected(_);
+                },
               ),
               const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
               Container(
@@ -133,13 +157,13 @@ class _MyAddScreenState extends State<MyAddScreen> {
                     child: Icon(Icons.camera_alt),
                   )),
               const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
-              Container(
+              SizedBox(
                 width: 100,
                 child: FloatingActionButton(
                   onPressed: () {
                     // Put your code here to be executed when the FAB is pressed.
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.add), // Add leading add icon here
