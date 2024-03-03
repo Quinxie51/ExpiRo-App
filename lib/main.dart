@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'home.dart';
 import 'notifications.dart';
 import 'guide.dart';
@@ -74,8 +75,15 @@ final List<BottomNavigationBarItem> _items = [
     icon: Icon(Icons.notifications),
     label: 'Notifications',
   ),
-  const BottomNavigationBarItem(
-    icon: Icon(Icons.add),
+  BottomNavigationBarItem(
+    icon: Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(150, 171, 176, 180),
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: const Icon(Icons.add),
+    ),
     label: 'Add',
   ),
   const BottomNavigationBarItem(

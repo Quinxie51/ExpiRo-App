@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 
 class MyGuideScreen extends StatelessWidget {
-  const MyGuideScreen({Key? key}) : super(key: key);
+  const MyGuideScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double fem = size.width / 380;
-    final double ffem = fem * 0.97;
 
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 0),
           child: Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xffffffff),
             ),
             child: Column(
@@ -80,12 +79,12 @@ class PositionedContent extends StatelessWidget {
   final String content;
 
   const PositionedContent({
-    Key? key,
+    super.key,
     required this.left,
     required this.imageUrl,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +115,7 @@ class PositionedContent extends StatelessWidget {
               fontSize: 16 * ffem,
               fontWeight: FontWeight.w700,
               height: 1.4,
-              color: Color(0xff2d3648),
+              color: const Color(0xff2d3648),
             ),
           ),
           SizedBox(height: 6 * fem),
@@ -128,7 +127,7 @@ class PositionedContent extends StatelessWidget {
               fontWeight: FontWeight.w400,
               height: 1.5,
               letterSpacing: -0.14,
-              color: Color(0xff717d96),
+              color: const Color(0xff717d96),
             ),
           ),
         ],
