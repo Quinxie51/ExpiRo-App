@@ -3,6 +3,7 @@ import 'home.dart';
 import 'notifications.dart';
 import 'guide.dart';
 import 'profile.dart';
+import 'add.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,8 +39,8 @@ class _MyAppState extends State<MyApp> {
             ),
         ),
 
-      floatingActionButton: _buildFloatingActionButton(), // Add the FAB here
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, // Position the FAB in the center
+      // floatingActionButton: _buildFloatingActionButton(), // Add the FAB here
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, // Position the FAB in the center
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: _items,
@@ -52,8 +53,10 @@ class _MyAppState extends State<MyApp> {
         children: const [
           MyHomeScreen(),
           MyNotificationsScreen(),
+          MyAddScreen(),
           MyGuideScreen(),
           MyProfileScreen(),
+          
         ],
         ),
       ),
@@ -72,6 +75,10 @@ final List<BottomNavigationBarItem> _items = [
     label: 'Notifications',
   ),
   const BottomNavigationBarItem(
+    icon: Icon(Icons.add),
+    label: 'Add',
+  ),
+  const BottomNavigationBarItem(
     icon: Icon(Icons.map_outlined),
     label: 'Guide',
   ),
@@ -79,17 +86,18 @@ final List<BottomNavigationBarItem> _items = [
     icon: Icon(Icons.person),
     label: 'Profile',
   ),
+  
 ];
 
-Widget _buildFloatingActionButton() {
-  return FloatingActionButton(
-    onPressed: () {
-      // Add your button press action here
-    }, 
-    backgroundColor: Color.fromARGB(150, 171, 176, 180),
-    shape: const CircleBorder(),
-    child: const Icon(Icons.add), 
-  );
-}
+// Widget _buildFloatingActionButton() {
+//   return FloatingActionButton(
+//     onPressed: () {
+//       // Add your button press action here
+//     }, 
+//     backgroundColor: Color.fromARGB(150, 171, 176, 180),
+//     shape: const CircleBorder(),
+//     child: const Icon(Icons.add), 
+//   );
+// }
 
 
