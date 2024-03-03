@@ -21,47 +21,51 @@ class MyNotificationsScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(2.0),
-              padding: EdgeInsets.all(10),
-              // color: const Color.fromARGB(255, 158, 200, 234),
-              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(10),
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 color: Color.fromARGB(255, 242, 242, 242),
               ),
               child: const Row(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min, // Prevents extra vertical space
                 children: [
-                  Text('Fried Chicken is about to expire! eat it fast',
-                      textAlign: TextAlign.left),
-                  Spacer(),
-                  Text(
-                    "1 hour ago",
-                    textAlign: TextAlign.right,
-                  )
+                  Expanded(
+                    // Ensures first text fills available space
+                    child: Text(
+                      'Chicked is about to expire. Eat it fast!',
+                      overflow: TextOverflow.visible, // Disable ellipsis
+                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Text("1 hour ago",
+                      textAlign: TextAlign.right), // Right-aligned
                 ],
               ),
             ),
             Container(
               margin: const EdgeInsets.all(2.0),
-              padding: EdgeInsets.all(10),
-              // color: const Color.fromARGB(255, 158, 200, 234),
-              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(10),
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 color: Color.fromARGB(255, 242, 242, 242),
               ),
               child: const Row(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min, // Prevents extra vertical space
                 children: [
-                  Text('Bread is about to expire! eat it fast',
-                      textAlign: TextAlign.left),
-                  Spacer(),
-                  Text(
-                    "12 hours ago",
-                    textAlign: TextAlign.right,
-                  )
+                  Expanded(
+                    // Ensures first text fills available space
+                    child: Text(
+                      'Bread is about to expire! eat it fast',
+                      overflow: TextOverflow.visible, // Disable ellipsis
+                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Text("12 hours ago",
+                      textAlign: TextAlign.right), // Right-aligned
                 ],
               ),
             ),
