@@ -1,0 +1,4 @@
+use_frameworks!
+target 'yourProjectName' do
+    pod 'Camera'
+end

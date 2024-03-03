@@ -1,17 +1,29 @@
+import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:hackathon_app/camera_page.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:csv/csv.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MyAddScreen extends StatefulWidget {
   const MyAddScreen({super.key});
+  
+
 
   @override
   _MyAddScreenState createState() => _MyAddScreenState();
 }
 
 class _MyAddScreenState extends State<MyAddScreen> {
+  bool circular = false;
+  PickedFile? _imageFile;
   DateTime? _selectedDate;
   String categoryValue = "Others";
   String reminderValue = '5 days before';
   String foodName = "";
+  final ImagePicker _picker = ImagePicker();
+ 
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -40,16 +52,19 @@ class _MyAddScreenState extends State<MyAddScreen> {
     });
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     const double defaultPadding = 16.0;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Set the desired margin value
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
+              const SizedBox(height: defaultPadding),
+              imageProfile(),
+              const SizedBox(height: defaultPadding),
               const Text(
                 "Food Name",
                 style: TextStyle(
@@ -65,7 +80,7 @@ class _MyAddScreenState extends State<MyAddScreen> {
                   hintText: "Enter food name",
                 ),
               ),
-              const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
+              const SizedBox(height: defaultPadding),
               const Text(
                 "Expiry Date",
                 style: TextStyle(
@@ -88,7 +103,7 @@ class _MyAddScreenState extends State<MyAddScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
+              const SizedBox(height: defaultPadding),
               const Text(
                 "Category",
                 style: TextStyle(
@@ -119,7 +134,7 @@ class _MyAddScreenState extends State<MyAddScreen> {
                   categorySelected(_);
                 },
               ),
-              const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
+              const SizedBox(height: defaultPadding),
               const Text(
                 "Set Reminder",
                 style: TextStyle(
@@ -146,27 +161,24 @@ class _MyAddScreenState extends State<MyAddScreen> {
                   reminderSelected(_);
                 },
               ),
-              const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
-              Container(
-                  width: 400,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: const Center(
-                    child: Icon(Icons.camera_alt),
-                  )),
-              const SizedBox(height: defaultPadding), // Add a SizedBox for spacing
+              const SizedBox(height: defaultPadding),
+              const SizedBox(height: defaultPadding),
               SizedBox(
                 width: 100,
                 child: FloatingActionButton(
                   onPressed: () {
                     // Put your code here to be executed when the FAB is pressed.
+                    List<List<dynamic>> csvData = [
+                      ["Food Name", "Expiry Date", "Category", "Reminder"],
+                      [foodName, _selectedDate.toString(), categoryValue, reminderValue],
+                    ];
+                    String csvString = ListToCsvConverter().convert(csvData);
+                    _saveToCsv(csvString);
                   },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.add), // Add leading add icon here
+                      Icon(Icons.add),
                       Text("Add"),
                     ],
                   ),
@@ -178,4 +190,127 @@ class _MyAddScreenState extends State<MyAddScreen> {
       ),
     );
   }
+
+  Widget imageProfile() {
+  return Center(
+    child: Stack(
+      children: <Widget>[
+        Container(
+          width: 160, // Adjust the width as needed to make it square
+          height: 160, // Adjust the height as needed to make it square
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            border: Border.all(color: Colors.grey),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+            child: _imageFile == null
+                ? Image.asset("assets/images/camera.png", fit: BoxFit.cover)
+                : Image.file(File(_imageFile!.path), fit: BoxFit.cover),
+          ),
+        ),
+        Positioned(
+          bottom: 20.0,
+          right: 20.0,
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: ((builder) => bottomSheet()),
+              );
+            },
+            child: Icon(
+              Icons.camera_alt,
+              color: Colors.teal,
+              size: 28.0,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
+
+
+  Widget bottomSheet() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "Choose Profile photo",
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton.icon(
+                icon: Icon(Icons.camera),
+                onPressed: () {
+                  takePhoto(ImageSource.camera);
+                },
+                label: Text("Camera"),
+              ),
+              TextButton.icon(
+                icon: Icon(Icons.image),
+                onPressed: () {
+                  takePhoto(ImageSource.gallery);
+                },
+                label: Text("Gallery"),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      _imageFile = pickedFile as PickedFile;
+    });
+  }
+}
+void _saveToCsv(String csvString) async {
+  String filePath = "savedata.csv"; // Adjust path if needed
+  print(filePath);
+  
+
+  final file = await File(filePath).create();
+  await file.writeAsString(csvString);
+
+  if (Platform.isAndroid) {
+    var status = await Permission.storage.request();
+    if (status.isGranted) {
+      try {
+        final file = await File(filePath).create(); // Create file if needed
+        await file.writeAsString(csvString);
+      } catch (e) {
+        print("Error creating or writing to file: $e");
+      }
+    } else {
+      print("Storage permission denied");
+    }
+  } else {
+    try {
+      final file = await File(filePath).create(); // Create file if needed
+      await file.writeAsString(csvString);
+    } catch (e) {
+      print("Error creating or writing to file: $e");
+    }
+  }
+}
+
