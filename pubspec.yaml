@@ -61,8 +61,12 @@ flutter:
   assets:
     - assets/images/user_profile.jpg
     - assets/images/food container.jpeg
-    - assets/images/meat.png
+    - assets/images/fish.jpeg
     - assets/images/tomato.jpeg
+    - assets/images/milk.jpeg
+    - assets/images/egg.jpeg
+    - assets/images/bread.jpeg
+
 
 
   # The following line ensures that the Material Icons font is

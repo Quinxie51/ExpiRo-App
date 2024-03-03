@@ -5,40 +5,64 @@ class MyGuideScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final double fem = size.width / 380;
+    final double ffem = fem * 0.97;
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 20), // Adjust the top padding here
+          padding: EdgeInsets.only(top: 20),
           child: Container(
             width: double.infinity,
-            height: 844,
             decoration: BoxDecoration(
               color: Color(0xffffffff),
             ),
-            child: Stack(
+            child: Column(
               children: <Widget>[
+                SizedBox(height: 30 * fem), // Adjust the space between header and content
                 PositionedContent(
-                  left: 24,
-                  top: 30,
+                  left: 24 * fem,
                   imageUrl: 'assets/images/tomato.jpeg',
-                  title: 'Green Food',
+                  title: 'Fruit and Vegetable Scraps',
                   content:
-                      'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc. Risus ac tellus sapien gravida sit elementum dui eget nunc.',
+                      'Compost: Add to your compost bin for nutrient-rich soil. \nReuse: Make vegetable broth from peels or use citrus peels for homemade cleaners.',
                 ),
+                SizedBox(height: 20 * fem), // Adjust the space between content
                 PositionedContent(
-                  left: 24,
-                  top: 230,
+                  left: 24 * fem,
                   imageUrl: 'assets/images/food container.jpeg',
                   title: 'Food Container',
-                  content: 'Dictumst scelerisque ut commodo dis. Risus ac tellus sapien gravida sit elementum dui eget nunc.',
+                  content: 'Compost: Clean cardboard/paper and tear for compost. \nReuse: Use for storage, crafts, or recycle for new products.',
                 ),
+                SizedBox(height: 20 * fem), // Adjust the space between content
                 PositionedContent(
-                  left: 24,
-                  top: 430,
-                  imageUrl: 'assets/images/meat.png',
-                  title: 'Meat',
-                  content: 'Eu arcu montes, sit elit, maecenas feugiat. Urna, habitant suspendisse suspendisse pharetra nec.',
+                  left: 24 * fem,
+                  imageUrl: 'assets/images/fish.jpeg',
+                  title: 'Meat and Fish Scraps',
+                  content: 'Compost: Add sparingly; bury deep to deter pests.\nReuse: Use leftover meat/fish for soups or stocks.',
+                ),
+                SizedBox(height: 20 * fem), // Adjust the space between content
+                PositionedContent(
+                  left: 24 * fem,
+                  imageUrl: 'assets/images/egg.jpeg',
+                  title: 'Eggshells',
+                  content: 'Compost: Crush and add to compost for calcium boost.\nReuse: Crushed shells deter pests; use as calcium supplement.',
+                ),
+                SizedBox(height: 20 * fem), // Adjust the space between content
+                PositionedContent(
+                  left: 24 * fem,
+                  imageUrl: 'assets/images/milk.jpeg',
+                  title: 'Dairy Products (e.g., Milk, Cheese)',
+                  content: 'Compost: Use sparingly; bury deep to avoid odor.\nReuse: Make yogurt or cheese from expired milk; use cheese rinds for flavor.',
+                ),
+                SizedBox(height: 20 * fem), // Adjust the space between content
+                PositionedContent(
+                  left: 24 * fem,
+                  imageUrl: 'assets/images/bread.jpeg',
+                  title: 'Stale Bread and Pastries',
+                  content: 'Compost: Tear into small pieces and add to compost.\nReuse: Make breadcrumbs, croutons, or bread pudding.',
                 ),
               ],
             ),
@@ -49,28 +73,8 @@ class MyGuideScreen extends StatelessWidget {
   }
 }
 
-
-class PositionedHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    double fem = MediaQuery.of(context).size.width / 380;
-    double ffem = fem * 0.97;
-    return Positioned(
-      left: 16 * fem,
-      top: 53 * fem,
-      child: Align(
-        child: SizedBox(
-          width: 143 * fem,
-          height: 15 * fem,
-        ),
-      ),
-    );
-  }
-}
-
 class PositionedContent extends StatelessWidget {
   final double left;
-  final double top;
   final String imageUrl;
   final String title;
   final String content;
@@ -78,7 +82,6 @@ class PositionedContent extends StatelessWidget {
   const PositionedContent({
     Key? key,
     required this.left,
-    required this.top,
     required this.imageUrl,
     required this.title,
     required this.content,
@@ -86,64 +89,49 @@ class PositionedContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double fem = MediaQuery.of(context).size.width / 380;
-    double ffem = fem * 0.97;
-    return Positioned(
-      left: left * fem,
-      top: top * fem,
-      child: Container(
-        width: 324 * fem,
-        height: 190 * fem,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 6 * fem),
+    final Size size = MediaQuery.of(context).size;
+    final double fem = size.width / 380;
+    final double ffem = fem * 0.97;
+
+    return Container(
+      width: size.width,
+      padding: EdgeInsets.symmetric(horizontal: 24 * fem),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 6 * fem),
+            width: 48 * fem,
+            height: 48 * fem,
+            child: Image.asset(
+              imageUrl,
               width: 48 * fem,
               height: 48 * fem,
-              child: Image.asset(
-                imageUrl,
-                width: 48 * fem,
-                height: 48 * fem,
-              ),
             ),
-            Container(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 6 * fem),
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 16 * ffem,
-                        fontWeight: FontWeight.w700,
-                        height: 1.3999999762 * ffem / fem,
-                        color: Color(0xff2d3648),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    constraints: BoxConstraints(maxWidth: 300 * fem),
-                    child: Text(
-                      content,
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 14 * ffem,
-                        fontWeight: FontWeight.w400,
-                        height: 1.5 * ffem / fem,
-                        letterSpacing: -0.14 * fem,
-                        color: Color(0xff717d96),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 16 * ffem,
+              fontWeight: FontWeight.w700,
+              height: 1.4,
+              color: Color(0xff2d3648),
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 6 * fem),
+          Text(
+            content,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 14 * ffem,
+              fontWeight: FontWeight.w400,
+              height: 1.5,
+              letterSpacing: -0.14,
+              color: Color(0xff717d96),
+            ),
+          ),
+        ],
       ),
     );
   }
