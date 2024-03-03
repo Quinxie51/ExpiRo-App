@@ -9,7 +9,16 @@ class MyGuideScreen extends StatelessWidget {
     final double fem = size.width / 380;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          'Guide',
+          style: TextStyle(
+            fontFamily: "QuickSand",
+            fontSize: 18.0,
+            fontWeight: FontWeight.normal,
+          ),
+        )
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 0),
@@ -20,7 +29,6 @@ class MyGuideScreen extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                SizedBox(height: 30 * fem), // Adjust the space between header and content
                 PositionedContent(
                   left: 24 * fem,
                   imageUrl: 'assets/images/tomato.jpeg',

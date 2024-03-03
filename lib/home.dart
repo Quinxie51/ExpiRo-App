@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'popUpIconMenu.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -91,6 +92,63 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 )
               ],
             ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/bread.jpeg",
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(width: 16.0),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                "name",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const Spacer(),
+                              PopUpIconMenu(onSelected: (value) => {print(value)})
+                            ],
+                          ),
+                          const Row(
+                            children: [
+                              Text(
+                                "x days before expiration",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Spacer(),
+                            ],
+                          ),
+                          const Row(
+                            children: [
+                              Text(
+                                "mm-dd-yyyy",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Spacer(),
+                            ],
+                          )
+                        ],
+                        )
+                      )
+                  ],
+                ),
+                ),
+            )
           ],
         )
       );
