@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 
 class _MyAppState extends State<MyApp> {
+  @override
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
   setState(() {
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'ExpirySmart',
+            'ExpiRo',
             style: TextStyle(
               fontFamily: "QuickSand",
               fontSize: 24.0,
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             ),
             ),
         ),
-
+      
       // floatingActionButton: _buildFloatingActionButton(), // Add the FAB here
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, // Position the FAB in the center
       bottomNavigationBar: BottomNavigationBar(
@@ -51,12 +52,12 @@ class _MyAppState extends State<MyApp> {
         ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [
-          MyHomeScreen(),
-          MyNotificationsScreen(),
-          MyAddScreen(),
-          MyGuideScreen(),
-          MyProfileScreen(),
+        children: [
+          new MyHomeScreen(),
+          const MyNotificationsScreen(),
+          const MyAddScreen(),
+          const MyGuideScreen(),
+          const MyProfileScreen(),
           
         ],
         ),
@@ -77,7 +78,7 @@ final List<BottomNavigationBarItem> _items = [
   ),
   BottomNavigationBarItem(
     icon: Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: const Color.fromARGB(150, 171, 176, 180),
         borderRadius: BorderRadius.circular(25),
@@ -96,16 +97,4 @@ final List<BottomNavigationBarItem> _items = [
   ),
   
 ];
-
-// Widget _buildFloatingActionButton() {
-//   return FloatingActionButton(
-//     onPressed: () {
-//       // Add your button press action here
-//     }, 
-//     backgroundColor: Color.fromARGB(150, 171, 176, 180),
-//     shape: const CircleBorder(),
-//     child: const Icon(Icons.add), 
-//   );
-// }
-
 

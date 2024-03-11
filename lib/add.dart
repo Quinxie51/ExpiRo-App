@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +6,13 @@ import 'package:hackathon_app/camera_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:csv/csv.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'cardData.dart';
+import 'home.dart' as home;
+
 
 class MyAddScreen extends StatefulWidget {
   const MyAddScreen({super.key});
-  
-
-
   @override
   _MyAddScreenState createState() => _MyAddScreenState();
 }
@@ -23,8 +25,28 @@ class _MyAddScreenState extends State<MyAddScreen> {
   String reminderValue = '5 days before';
   String foodName = "";
   final ImagePicker _picker = ImagePicker();
- 
 
+  @override
+  void initState() {
+    super.initState();
+  }
+  Future<List<CardData>> _loadCardData() async{
+    final prefs = await SharedPreferences.getInstance();
+    final encodedData = prefs.getString('card_data');
+    if (encodedData != null) {
+      final decodedData = jsonDecode(encodedData) as List<dynamic>;
+      return decodedData.map((data) => CardData.fromJson(data)).toList();
+    } else {
+      return []; // Return empty list if no data is found
+    }
+  }
+
+  void setName(String name){
+    setState(() {
+      foodName = name;
+    });
+  }
+  
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -52,6 +74,20 @@ class _MyAddScreenState extends State<MyAddScreen> {
     });
   }
 
+  
+
+  void _saveCardData(List<CardData> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encodedData = jsonEncode(data.map((card) => card.toJson()).toList());
+    await prefs.setString('card_data', encodedData);
+    print("data saved");
+
+    setState(() {
+      foodName = '';
+      _selectedDate = null;
+    });
+  }
+
 @override
   Widget build(BuildContext context) {
     const double defaultPadding = 16.0;
@@ -73,9 +109,8 @@ class _MyAddScreenState extends State<MyAddScreen> {
                 ),
               ),
               TextField(
-                onSubmitted: (value) {
-                  foodName = value;
-                },
+                onChanged: (value) => 
+                  setName(value),
                 decoration: const InputDecoration(
                   hintText: "Enter food name",
                 ),
@@ -166,14 +201,18 @@ class _MyAddScreenState extends State<MyAddScreen> {
               SizedBox(
                 width: 100,
                 child: FloatingActionButton(
-                  onPressed: () {
-                    // Put your code here to be executed when the FAB is pressed.
-                    List<List<dynamic>> csvData = [
-                      ["Food Name", "Expiry Date", "Category", "Reminder"],
-                      [foodName, _selectedDate.toString(), categoryValue, reminderValue],
-                    ];
-                    String csvString = ListToCsvConverter().convert(csvData);
-                    _saveToCsv(csvString);
+                  onPressed: () async {
+                    CardData newCard = CardData(
+                      foodName: foodName,
+                      expiryDate: _selectedDate.toString().substring(0, 11),
+                      category: categoryValue,
+                      imageUrl: "assets/images/egg.jpeg",
+                      reminderRate: reminderValue,
+                    );
+                    List<CardData> data = await _loadCardData();
+                    // List<CardData> data = [];
+                    data.add(newCard);
+                    _saveCardData(data);
                   },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -237,37 +276,37 @@ class _MyAddScreenState extends State<MyAddScreen> {
     return Container(
       height: 100.0,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 20,
       ),
       child: Column(
         children: <Widget>[
-          Text(
+          const Text(
             "Choose Profile photo",
             style: TextStyle(
               fontSize: 20.0,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextButton.icon(
-                icon: Icon(Icons.camera),
+                icon: const Icon(Icons.camera),
                 onPressed: () {
                   takePhoto(ImageSource.camera);
                 },
-                label: Text("Camera"),
+                label: const Text("Camera"),
               ),
               TextButton.icon(
-                icon: Icon(Icons.image),
+                icon: const Icon(Icons.image),
                 onPressed: () {
                   takePhoto(ImageSource.gallery);
                 },
-                label: Text("Gallery"),
+                label: const Text("Gallery"),
               ),
             ],
           )
@@ -285,33 +324,3 @@ class _MyAddScreenState extends State<MyAddScreen> {
     });
   }
 }
-void _saveToCsv(String csvString) async {
-  String filePath = "savedata.csv"; 
-  print(filePath);
-  
-
-  final file = await File(filePath).create();
-  await file.writeAsString(csvString);
-
-  if (Platform.isAndroid) {
-    var status = await Permission.storage.request();
-    if (status.isGranted) {
-      try {
-        final file = await File(filePath).create(); // Create file if needed
-        await file.writeAsString(csvString);
-      } catch (e) {
-        print("Error creating or writing to file: $e");
-      }
-    } else {
-      print("Storage permission denied");
-    }
-  } else {
-    try {
-      final file = await File(filePath).create(); // Create file if needed
-      await file.writeAsString(csvString);
-    } catch (e) {
-      print("Error creating or writing to file: $e");
-    }
-  }
-}
-
