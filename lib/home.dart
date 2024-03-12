@@ -24,17 +24,22 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  String sort = "Recent";
+  String sort = "Least Time Left";
   IconData arrowIcon = Icons.arrow_drop_down;
   // List<CardData> data = _loadCardData();
 
-  void changeSort() {
+  void changeSort(List<CardData> data) {
     setState(() {
-      sort = sort == "Recent" ? "Oldest" : "Recent";
+      sort = sort == "Least Time Left" ? "Most Time Left" : "Least Time Left";
       arrowIcon =
-          sort == "Recent" ? Icons.arrow_drop_up : Icons.arrow_drop_down;
+          sort == "Least Time Left" ? Icons.arrow_drop_up : Icons.arrow_drop_down;
+      
+      //reverse data based
+      data = data.reversed.toList();
+      _saveCardData(data);
     });
   }
+  
   void _saveCardData(List<CardData> data) async {
     final prefs = await SharedPreferences.getInstance();
     final encodedData = jsonEncode(data.map((card) => card.toJson()).toList());
@@ -111,7 +116,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                           shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)))),
-                      onPressed: changeSort,
+                      onPressed: () => changeSort(data),
                       child: Row(
                         // Use Row for horizontal arrangement
                         children: [

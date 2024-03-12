@@ -74,9 +74,8 @@ class _MyAddScreenState extends State<MyAddScreen> {
     });
   }
 
-  
-
   void _saveCardData(List<CardData> data) async {
+    data.sort((a, b) => a.expiryDate.compareTo(b.expiryDate));
     final prefs = await SharedPreferences.getInstance();
     final encodedData = jsonEncode(data.map((card) => card.toJson()).toList());
     await prefs.setString('card_data', encodedData);
