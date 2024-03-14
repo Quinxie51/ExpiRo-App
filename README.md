@@ -7,7 +7,7 @@ ExpiRo is a revolutionary mobile application aimed at reducing food waste by hel
 - [Introduction](#introduction)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Team Members](#team-memebers)
+- [Team Members](#team-members)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
