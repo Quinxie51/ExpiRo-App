@@ -7,6 +7,7 @@ ExpiRo is a revolutionary mobile application aimed at reducing food waste by hel
 - [Introduction](#introduction)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Team Members](#team-memebers)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -32,6 +33,15 @@ ExpiRo is built using the following technologies:
 - **Dart:** The programming language used for developing Flutter applications.
 - **GitHub:** Version control and collaboration platform for managing the project's codebase.
 - **CSV:** File format utilized for efficient saving and loading of data within the app.
+
+## Team Members
+
+We would like to acknowledge and thank the following team members for their contributions to the ExpiRo project:
+
+- **Bibhu Lamichhane** 
+- **Riva Kansakar** 
+- **Quinxie Doan** 
+- **Drishtant Bhandari** 
 
 ## Installation
 
