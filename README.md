@@ -19,6 +19,7 @@ ExpiRo addresses the global issue of food waste by providing users with a simple
 ## Features
 
 - **Inventory Management:** Keep track of all your food items with ease, including their names, expiration dates, and photos.
+- **Item Scanning:** Use your device's camera to scan food items, automatically filling in their expiration dates and adding them to your inventory.
 - **Notification System:** Receive timely reminders before your food items expire, ensuring you never waste another meal.
 - **Guidance on Food Recycling:** Access helpful tips and resources on how to recycle food scraps and reduce waste.
 - **User Profile:** Customize your experience and track your progress in reducing food waste.
