@@ -2,7 +2,7 @@
 
 ExpiRo is a revolutionary mobile application aimed at reducing food waste by helping users keep track of their food's expiration dates and providing timely reminders. With ExpiRo, users can effectively manage their food inventory, minimize waste, and contribute to a more sustainable future.
 
-![Demo Screenshot](assets/images/1Demo.png)
+![Demo Screenshot](assets/images/2Demo.png)
 
 ## Table of Contents
 
